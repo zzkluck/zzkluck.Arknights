@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zzkluck.Arknights.Library", "zzkluck.Arknights.Library\zzkluck.Arknights.Library.csproj", "{3A2B1F59-9658-4D2F-8E93-35CA8DB80218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zzkluck.Arknights.LibraryTests", "zzkluck.Arknights.LibraryTests\zzkluck.Arknights.LibraryTests.csproj", "{60B70131-551A-4046-AFE7-C1370E53B832}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A2B1F59-9658-4D2F-8E93-35CA8DB80218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2B1F59-9658-4D2F-8E93-35CA8DB80218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2B1F59-9658-4D2F-8E93-35CA8DB80218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2B1F59-9658-4D2F-8E93-35CA8DB80218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60B70131-551A-4046-AFE7-C1370E53B832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60B70131-551A-4046-AFE7-C1370E53B832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60B70131-551A-4046-AFE7-C1370E53B832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60B70131-551A-4046-AFE7-C1370E53B832}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE33A649-A95D-4815-B16C-4A0322AE1D10}
+	EndGlobalSection
+EndGlobal
