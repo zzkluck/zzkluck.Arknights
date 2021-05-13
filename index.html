@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1920px;height:1080px;"></div>
+    <script type="text/javascript">
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var label_where = 'inside';
+        var option;
+
+        var data = [
+            [
+                [110, 27, 535, "Lancet-2", "医疗"],
+                [408, 110, 1220, "芙蓉", "医疗"],
+                [427, 109, 1135, "安赛尔", "医疗"],
+                [338, 102, 1080, "预备干员-后勤", "医疗"],
+                [548, 131, 1420, "末药", "医疗"],
+                [503, 182, 1580, "嘉维尔", "医疗"],
+                [571, 122, 1345, "苏苏洛", "医疗"],
+                [364, 145, 1710, "调香师", "医疗"],
+                [488, 118, 1515, "清流", "医疗"],
+                [411, 150, 1610, "白面鸮", "医疗"],
+                [393, 153, 1795, "微风", "医疗"],
+                [581, 142, 1595, "赫默", "医疗"],
+                [607, 125, 1520, "华法琳", "医疗"],
+                [529, 133, 1785, "亚叶", "医疗"],
+                [595, 135, 1633, "Touch", "医疗"],
+                [482, 126, 1655, "锡兰", "医疗"],
+                [530, 119, 1632, "絮雨", "医疗"],
+                [568, 135, 1550, "图耶", "医疗"],
+                [610, 183, 1613, "闪灵", "医疗"],
+                [420, 169, 1705, "夜莺", "医疗"],
+                [515, 255, 2033, "凯尔希", "医疗"],
+            ],
+            [
+                [376, 90, 1306, "Castle-3", "近卫"],
+                [763, 155, 2620, "玫兰莎", "近卫"],
+                [568, 245, 1858, "泡普卡", "近卫"],
+                [575, 412, 1990, "杜宾", "近卫"],
+                [855, 156, 4100, "缠丸", "近卫"],
+                [888, 188, 3555, "断罪者", "近卫"],
+                [660, 378, 2260, "霜叶", "近卫"],
+                [690, 315, 3050, "艾丝黛尔", "近卫"],
+                [705, 392, 2345, "慕斯", "近卫"],
+                [662, 325, 2320, "刻刀", "近卫"],
+                [746, 352, 3444, "宴", "近卫"],
+                [713, 340, 2250, "芳汀", "近卫"],
+                [659, 443, 1740, "诗怀雅", "近卫"],
+                [614, 460, 1757, "鞭刃", "近卫"],
+                [965, 260, 3620, "芙兰卡", "近卫"],
+                [894, 195, 4115, "炎客", "近卫"],
+                [957, 265, 3565, "Sharp", "近卫"],
+                [628, 350, 2565, "因陀罗", "近卫"],
+                [644, 334, 2495, "燧石", "近卫"],
+                [785, 365, 2350, "拉普兰德", "近卫"],
+                [771, 375, 2420, "断崖", "近卫"],
+                [704, 332, 2550, "柏喙", "近卫"],
+                [661, 349, 2626, "战车", "近卫"],
+                [832, 355, 2630, "幽灵鲨", "近卫"],
+                [870, 366, 2335, "布洛卡", "近卫"],
+                [690, 471, 2523, "星极", "近卫"],
+                [620, 369, 3345, "铸铁", "近卫"],
+                [758, 406, 3635, "赤冬", "近卫"],
+                [656, 402, 2745, "山", "近卫"],
+                [789, 447, 2560, "银灰", "近卫"],
+                [767, 472, 2612, "棘刺", "近卫"],
+                [683, 402, 2880, "陈", "近卫"],
+                [853, 415, 2821, "煌", "近卫"],
+                [800, 414, 2916, "史尔特尔", "近卫"],
+                [858, 334, 4225, "赫拉格", "近卫"],
+                [740, 360, 2680, "暴行", "近卫"],
+                [569, 282, 1653, "月见夜", "近卫"],
+                [573, 312, 2615, "猎蜂", "近卫"],
+                [610, 308, 2378, "杰克", "近卫"],
+                [1046, 303, 3665, "斯卡蒂", "近卫"],
+            ],
+            [
+                [350, 443, 1443, "THRM-EX", "特种"],
+                [452, 335, 1880, "砾", "特种"],
+                [737, 378, 2484, "孑", "特种"],
+                [728, 407, 1720, "暗索", "特种"],
+                [742, 337, 2130, "伊桑", "特种"],
+                [615, 365, 2125, "阿消", "特种"],
+                [625, 302, 1505, "红", "特种"],
+                [586, 353, 1455, "槐琥", "特种"],
+                [525, 311, 2175, "卡夫卡", "特种"],
+                [790, 396, 2598, "乌有", "特种"],
+                [835, 340, 1970, "崖心", "特种"],
+                [745, 395, 2135, "雪雉", "特种"],
+                [901, 373, 1630, "狮蝎", "特种"],
+                [685, 382, 2145, "食铁兽", "特种"],
+                [553, 166, 1642, "罗宾", "特种"],
+                [592, 157, 1559, "霜华", "特种"],
+                [670, 322, 1775, "傀影", "特种"],
+                [722, 439, 2273, "温蒂", "特种"],
+                [753, 152, 2484, "阿", "特种"],
+                [851, 381, 2309, "歌蕾蒂娅", "特种"],
+            ],
+            [
+                [280, 192, 1030, "夜刀", "先锋"],
+                [325, 330, 1325, "芬", "先锋"],
+                [425, 240, 1270, "香草", "先锋"],
+                [309, 278, 1165, "预备干员-近战", "先锋"],
+                [516, 279, 1226, "翎羽", "先锋"],
+                [435, 405, 1985, "讯使", "先锋"],
+                [555, 310, 1835, "清道夫", "先锋"],
+                [642, 351, 1845, "红豆", "先锋"],
+                [520, 372, 1565, "桃金娘", "先锋"],
+                [455, 125, 1569, "豆苗", "先锋"],
+                [470, 444, 2150, "凛冬", "先锋"],
+                [594, 343, 1950, "德克萨斯", "先锋"],
+                [616, 342, 1824, "贾维", "先锋"],
+                [657, 364, 2215, "苇草", "先锋"],
+                [533, 418, 1669, "极境", "先锋"],
+                [600, 409, 2251, "推进之王", "先锋"],
+                [696, 382, 2484, "风笛", "先锋"],
+                [640, 372, 2205, "嵯峨", "先锋"],
+                [552, 437, 2235, "格拉尼", "先锋"],
+            ],
+            [
+                [240, 355, 1760, "黑角", "重装"],
+                [305, 475, 2630, "卡缇", "重装"],
+                [295, 578, 2035, "米格鲁", "重装"],
+                [350, 496, 1833, "斑点", "重装"],
+                [375, 670, 3870, "角峰", "重装"],
+                [365, 792, 3105, "蛇屠箱", "重装"],
+                [370, 745, 3416, "泡泡", "重装"],
+                [456, 562, 2950, "古米", "重装"],
+                [671, 568, 3007, "坚雷", "重装"],
+                [502, 650, 2780, "临光", "重装"],
+                [442, 670, 3023, "吽", "重装"],
+                [470, 782, 3240, "雷蛇", "重装"],
+                [380, 796, 3670, "可颂", "重装"],
+                [375, 781, 3456, "拜松", "重装"],
+                [870, 585, 4338, "火神", "重装"],
+                [673, 595, 3345, "石棉", "重装"],
+                [515, 721, 3213, "闪击", "重装"],
+                [378, 756, 3730, "暴雨", "重装"],
+                [490, 813, 3850, "星熊", "重装"],
+                [535, 682, 3150, "塞雷娅", "重装"],
+                [607, 601, 3242, "瑕光", "重装"],
+                [643, 826, 4099, "年", "重装"],
+                [882, 691, 4428, "泥岩", "重装"],
+                [1077, 712, 4468, "森蚺", "重装"],
+            ],
+            [
+                [299, 66, 780, "巡林者", "狙击"],
+                [446, 126, 1060, "克洛丝", "狙击"],
+                [438, 134, 1080, "安德切尔", "狙击"],
+                [401, 115, 980, "预备干员-狙击", "狙击"],
+                [563, 154, 1320, "杰西卡", "狙击"],
+                [553, 165, 1370, "流星", "狙击"],
+                [574, 162, 1230, "红云", "狙击"],
+                [566, 105, 1632, "梅", "狙击"],
+                [897, 100, 1630, "白雪", "狙击"],
+                [750, 167, 2200, "松果", "狙击"],
+                [1052, 122, 1595, "安比尔", "狙击"],
+                [845, 209, 1576, "酸糖", "狙击"],
+                [634, 130, 1230, "蓝毒", "狙击"],
+                [603, 165, 1550, "白金", "狙击"],
+                [611, 152, 1493, "灰喉", "狙击"],
+                [595, 159, 1549, "Stormeye", "狙击"],
+                [626, 160, 1280, "四月", "狙击"],
+                [985, 116, 1505, "陨星", "狙击"],
+                [951, 123, 1655, "慑砂", "狙击"],
+                [814, 185, 2330, "送葬人", "狙击"],
+                [782, 192, 2376, "奥斯塔", "狙击"],
+                [901, 215, 1680, "普罗旺斯", "狙击"],
+                [1210, 131, 1450, "守林人", "狙击"],
+                [1145, 128, 1798, "安哲拉", "狙击"],
+                [1083, 123, 1667, "熔泉", "狙击"],
+                [657, 161, 1673, "能天使", "狙击"],
+                [645, 172, 1705, "空弦", "狙击"],
+                [651, 169, 1689, "灰烬", "狙击"],
+                [970, 225, 1833, "黑", "狙击"],
+                [1047, 133, 1605, "W", "狙击"],
+                [1176, 122, 1755, "早露", "狙击"],
+                [780, 275, 1944, "迷迭香", "狙击"],
+                [699, 85, 1150, "空爆", "狙击"],
+            ],
+            [
+                [370, 62, 1052, "杜林", "术师"],
+                [474, 50, 1378, "12F", "术师"],
+                [595, 95, 1070, "炎熔", "术师"],
+                [543, 90, 1100, "史都华德", "术师"],
+                [456, 84, 1050, "预备干员-术师", "术师"],
+                [643, 110, 1520, "夜烟", "术师"],
+                [751, 118, 1520, "远山", "术师"],
+                [645, 130, 1755, "格雷伊", "术师"],
+                [375, 120, 1440, "卡达", "术师"],
+                [712, 121, 1880, "阿米娅", "术师"],
+                [703, 124, 1420, "苦艾", "术师"],
+                [635, 119, 2120, "特米米", "术师"],
+                [838, 122, 1530, "天火", "术师"],
+                [821, 128, 1655, "Pith", "术师"],
+                [676, 119, 1443, "惊蛰", "术师"],
+                [835, 225, 2005, "蜜蜡", "术师"],
+                [829, 120, 1550, "莱恩哈特", "术师"],
+                [807, 211, 1945, "薄绿", "术师"],
+                [1434, 125, 1535, "爱丽丝", "术师"],
+                [825, 115, 1453, "炎狱炎熔", "术师"],
+                [1015, 130, 1680, "伊芙利特", "术师"],
+                [889, 132, 1731, "莫斯提马", "术师"],
+                [762, 122, 1743, "艾雅法拉", "术师"],
+                [784, 128, 1565, "刻俄柏", "术师"],
+                [1008, 127, 1704, "夕", "术师"],
+                [728, 130, 1558, "异客", "术师"],
+                [718, 120, 1510, "夜魔", "术师"],
+            ],
+            [
+                [437, 83, 935, "梓兰", "辅助"],
+                [403, 125, 1350, "深海色", "辅助"],
+                [551, 101, 1205, "地灵", "辅助"],
+                [563, 96, 1163, "波登可", "辅助"],
+                [478, 130, 1268, "梅尔", "辅助"],
+                [432, 190, 1305, "稀音", "辅助"],
+                [495, 102, 1605, "初雪", "辅助"],
+                [473, 105, 1728, "巫恋", "辅助"],
+                [606, 104, 1280, "真理", "辅助"],
+                [563, 100, 1567, "格劳克斯", "辅助"],
+                [385, 258, 1496, "空", "辅助"],
+                [425, 175, 2080, "月禾", "辅助"],
+                [642, 120, 1385, "安洁莉娜", "辅助"],
+                [621, 128, 1480, "铃兰", "辅助"],
+                [532, 140, 1403, "麦哲伦", "辅助"],
+                [445, 263, 1603, "浊心斯卡蒂", "辅助"],
+            ],
+            [
+                [125, 0, 1000, "医疗探机", "TOKEN"],
+                [462, 335, 2016, "触手", "TOKEN"],
+                [1402, 405, 5433, "Mon3tr", "TOKEN"],
+                [0, 0, 6000, "幻影", "TOKEN"],
+                [444, 415, 1950, "机械水獭", "TOKEN"],
+                [0, 200, 2000, "龙腾.F", "TOKEN"],
+                [509, 200, 2000, "龙腾.L", "TOKEN"],
+                [753, 200, 2000, "龙腾.A", "TOKEN"],
+                [100, 0, 1000, "诅咒娃娃", "TOKEN"],
+                [548, 268, 1416, "镜中虚影", "TOKEN"],
+                [100, 0, 1000, "此面向敌", "TOKEN"],
+                [585, 100, 100, "工程蓄水炮", "TOKEN"],
+                [477, 377, 2020, "移动摄影器", "TOKEN"],
+                [100, 560, 5000, "沙之碑", "TOKEN"],
+                [100, 520, 5000, "迷迭香的战术装备", "TOKEN"],
+                [100, 0, 1000, " 夹子 ", "TOKEN"],
+                [404, 408, 1895, "磐蟹护卫队", "TOKEN"],
+                [398, 302, 1997, " 小自在 ", "TOKEN"],
+                [100, 0, 1000, "迎宾踏垫", "TOKEN"],
+                [100, 0, 100, "斯卡蒂的海嗣", "TOKEN"],
+            ],
+            [
+                [0, 0, 100, "障碍物", "TRAP"],
+                [3000, 0, 100, "震撼装置", "TRAP"],
+                [0, 0, 100, "闸门", "TRAP"],
+                [0, 0, 100, "侦测器", "TRAP"],
+                [0, 0, 3000, "干扰装置", "TRAP"],
+                [3000, 0, 100, "弩炮", "TRAP"],
+                [0, 100, 5000, "指挥终端", "TRAP"],
+                [0, 0, 10, "便携式补给站", "TRAP"],
+                [0, 0, 100, "源石冰晶", "TRAP"],
+                [0, 0, 100, "源石祭坛", "TRAP"],
+                [0, 0, 100, "干扰地雷", "TRAP"],
+                [0, 0, 100, "源石流发生装置", "TRAP"],
+                [0, 0, 100, "L-44 留声机 ", "TRAP"],
+                [0, 0, 100, "巨蕈", "TRAP"],
+                [13, 0, 100, "罗德岛临时雇员", "TRAP"],
+                [0, 0, 100, "轰隆隆先生", "TRAP"],
+                [0, 0, 100, "梅什科线圈", "TRAP"],
+                [0, 200, 8000, "道路障碍物", "TRAP"],
+                [0, 200, 6000, "能量聚合体", "TRAP"],
+                [0, 0, 100, "霜星的源石冰晶", "TRAP"],
+                [0, 0, 100, "爱国者的源石祭坛", "TRAP"],
+                [700, 1000, 20000, "盾卫", "TRAP"],
+                [0, 0, 2000, "禁锢装置", "TRAP"],
+                [0, 0, 100, "改良型二踢脚", "TRAP"],
+                [0, 0, 8000, "碎石", "TRAP"],
+                [0, 0, 100, "脉冲防御模组", "TRAP"],
+                [0, 0, 100, "催泪瓦斯控制阀", "TRAP"],
+                [0, 0, 100, "无人机工厂", "TRAP"],
+                [0, 0, 100, "雪雉的安全起重机", "TRAP"],
+                [0, 0, 5000, "土石结构", "TRAP"],
+                [4000, 0, 2000, "高能源石炸弹", "TRAP"],
+                [0, 0, 100, "加固装置", "TRAP"],
+                [999, 999, 999, "大帝", "TRAP"],
+                [10, 0, 100, "沙尘暴", "TRAP"],
+                [0, 0, 100, "可移动战术机库", "TRAP"],
+                [0, 0, 100, "应急救治设施", "TRAP"],
+                [150, 0, 3000, "子代", "TRAP"],
+            ],
+        ];
+
+        option = {
+            backgroundColor: new echarts.graphic.RadialGradient(0.5, 0.5, 1.0, [{
+                offset: 0,
+                color: '#FFEEDD'
+            }, {
+                offset: 1,
+                color: '#F7EED6'
+            }]),
+            title: {
+                text: '明日方舟干员大赏',
+                left: '5%',
+                top: '3%'
+            },
+            legend: {
+                right: '10%',
+                top: '3%',
+                data: ['医疗', '近卫', '特种', '先锋', '重装', '狙击', '术士', '辅助', 'token']
+            },
+            grid: {
+                left: '4%',
+                top: '10%',
+                right: '4%'
+            },
+            xAxis: {
+                name: '攻击力',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed',
+                        color: '#888888'
+                    }
+                },
+                min: 'dataMin',
+                max: 'dataMax',
+            },
+            yAxis: {
+                name: '防御力',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed',
+                        color: '#888888'
+                    }
+                },
+                min: 'dataMin',
+                max: 'dataMax',
+                scale: true
+            },
+            series: [
+            {//医疗
+                name: '医疗',
+                data: data[0],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) * 0.75;
+                },
+                label: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: label_where,
+                    fontFamily: '微软雅黑',
+                    color: "#000",
+                    textBorderColor: "#fff",
+                    textBorderWidth: 3
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top',
+                        fontSize: 20
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(120, 36, 50, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(252, 255, 100)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(152, 251, 0)'
+                    }])
+                }
+            }, 
+            {//近卫
+                name: '近卫',
+                data: data[1],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) * 0.75;
+                },
+                label: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: label_where,
+                    fontFamily: '微软雅黑',
+                    color: "#000",
+                    textBorderColor: "#fff",
+                    textBorderWidth: 3
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top',
+                        fontSize: 20
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(129, 227, 238)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(25, 183, 207)'
+                    }])
+                }
+            },
+            {//特种
+                name: '特种',
+                data: data[2],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) * 0.75;
+                },
+                label: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: label_where,
+                    fontFamily: '微软雅黑',
+                    color: "#000",
+                    textBorderColor: "#fff",
+                    textBorderWidth: 3
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top',
+                        fontSize: 20
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 255, 55)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(227, 199, 0)'
+                    }])
+                }
+            },
+            {//先锋
+                name: '先锋',
+                data: data[3],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) * 0.75;
+                },
+                label: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: label_where,
+                    fontFamily: '微软雅黑',
+                    color: "#000",
+                    textBorderColor: "#fff",
+                    textBorderWidth: 3
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top',
+                        fontSize: 20
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(227, 255, 255)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(127, 255, 212)'
+                    }])
+                },
+            },
+            {//重装
+                name: '重装',
+                data: data[4],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) * 0.75;
+                },
+                label: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: label_where,
+                    fontFamily: '微软雅黑',
+                    color: "#000",
+                    textBorderColor: "#fff",
+                    textBorderWidth: 3
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top',
+                        fontSize: 20
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 230, 171)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(255, 130, 71)'
+                    }])
+                },
+            },
+            {//狙击
+                name: '狙击',
+                data: data[5],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) * 0.75;
+                },
+                label: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: label_where,
+                    fontFamily: '微软雅黑',
+                    color: "#000",
+                    textBorderColor: "#fff",
+                    textBorderWidth: 3
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top',
+                        fontSize: 20
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(238, 143, 255)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(138, 43, 226)'
+                    }])
+                },
+            },
+            {//术士
+                name: '术士',
+                data: data[6],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) * 0.75;
+                },
+                label: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: label_where,
+                    fontFamily: '微软雅黑',
+                    color: "#000",
+                    textBorderColor: "#fff",
+                    textBorderWidth: 3
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top',
+                        fontSize: 20
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 255, 100)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(255, 165, 0)'
+                    }])
+                },
+            },
+            {//辅助
+                name: '辅助',
+                data: data[7],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) * 0.75;
+                },
+                label: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: label_where,
+                    fontFamily: '微软雅黑',
+                    color: "#000",
+                    textBorderColor: "#fff",
+                    textBorderWidth: 3
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top',
+                        fontSize: 20
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 199, 199)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(238, 99, 99)'
+                    }])
+                },
+            },
+            {//token
+                name: 'token',
+                data: data[8],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) * 0.75;
+                },
+                label: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: label_where,
+                    fontFamily: '微软雅黑',
+                    color: "#000",
+                    textBorderColor: "#fff",
+                    textBorderWidth: 3
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top',
+                        fontSize: 20
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(206, 190, 255)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(106, 90, 205)'
+                    }])
+                },
+            },
+        ]
+        };
+
+        option && myChart.setOption(option);
+    </script>
+</body>
+
+</html>
